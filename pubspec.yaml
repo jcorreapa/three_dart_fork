@@ -9,13 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.4
+  flutter_gl:
+    git:
+      url: git@github.com:jcorreapa/flutter_gl_fork.git
+      path: flutter_gl
+      ref: main
+  http: ^1.1.0
   universal_html: ^2.0.8
-  ffi: ^2.0.1
-  image: ^3.1.1
-  flutter_gl: ^0.0.20
+  image: ^4.1.3
   crypto: ^3.0.1
-  meta:
   
   # opentype:
   #   git: git@github.com:wasabia/opentype.git
@@ -28,11 +30,11 @@ dependencies:
   # flutter_webgpu:
   #   path: ../flutter_webgpu
 
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

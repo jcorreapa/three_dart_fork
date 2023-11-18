@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:three_dart/three3d/math/index.dart';
 
-import 'Constants_test.dart';
+import 'constants_test.dart';
 
 void main() {
   group('Maths', () {

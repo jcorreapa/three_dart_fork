@@ -133,7 +133,8 @@ class Object3D with EventDispatcher {
       List<BufferGeometry>? geometries = rootJSON["geometries"];
 
       if (geometries != null) {
-        geometry = geometries.firstWhere((element) => element.uuid == json["geometry"]);
+        geometry = geometries
+            .firstWhere((element) => element.uuid == json["geometry"]);
       }
     }
 
@@ -141,7 +142,8 @@ class Object3D with EventDispatcher {
       List<Material>? materials = rootJSON["materials"];
 
       if (materials != null) {
-        Material material = materials.firstWhere((element) => element.uuid == json["material"]);
+        Material material =
+            materials.firstWhere((element) => element.uuid == json["material"]);
         material = material;
       }
     }
@@ -163,7 +165,8 @@ class Object3D with EventDispatcher {
     quaternion.onChange(onQuaternionChange);
   }
 
-  static EventDispatcher castJSON(Map<String, dynamic> json, Map<String, dynamic> rootJSON) {
+  static EventDispatcher castJSON(
+      Map<String, dynamic> json, Map<String, dynamic> rootJSON) {
     String? type = json["type"];
 
     if (type == null) {
@@ -351,7 +354,8 @@ class Object3D with EventDispatcher {
 
   Object3D add(Object3D object) {
     if (object == this) {
-      print('three.Object3D.add: object can\'t be added as a child of itself. $object');
+      print(
+          'three.Object3D.add: object can\'t be added as a child of itself. $object');
       return this;
     }
 
@@ -596,7 +600,11 @@ class Object3D with EventDispatcher {
       // initialize meta obj
       meta = Object3dMeta();
 
-      output["metadata"] = {"version": 4.5, "type": 'Object', "generator": 'Object3D.toJSON'};
+      output["metadata"] = {
+        "version": 4.5,
+        "type": 'Object',
+        "generator": 'Object3D.toJSON'
+      };
     }
 
     // standard Object3D serialization
@@ -646,7 +654,7 @@ class Object3D with EventDispatcher {
         object["environment"] = environment!.toJSON(meta)['uuid'];
       }
     } else if (this is Mesh || this is Line || this is Points) {
-      object["geometry"] = serialize(meta!.geometries, geometry, meta);
+      object["geometry"] = serialize(meta.geometries, geometry, meta);
 
       var parameters = geometry!.parameters;
 
@@ -688,12 +696,12 @@ class Object3D with EventDispatcher {
 
       if (material is List) {
         for (var i = 0, l = material.length; i < l; i++) {
-          uuids.add(serialize(meta!.materials, material[i], meta));
+          uuids.add(serialize(meta.materials, material[i], meta));
         }
 
         object["material"] = uuids;
       } else {
-        object["material"] = serialize(meta!.materials, material, meta);
+        object["material"] = serialize(meta.materials, material, meta);
       }
     }
 
@@ -726,7 +734,7 @@ class Object3D with EventDispatcher {
     // }
 
     if (isRootObject) {
-      var geometries = extractFromCache(meta!.geometries);
+      var geometries = extractFromCache(meta.geometries);
       var materials = extractFromCache(meta.materials);
       var textures = extractFromCache(meta.textures);
       var images = extractFromCache(meta.images);
@@ -817,7 +825,13 @@ class Object3D with EventDispatcher {
     return this;
   }
 
-  void onAfterRender({WebGLRenderer? renderer, scene, Camera? camera, geometry, material, group}) {
+  void onAfterRender(
+      {WebGLRenderer? renderer,
+      scene,
+      Camera? camera,
+      geometry,
+      material,
+      group}) {
     // print(" Object3D.onAfterRender ${type} ${id} ");
   }
 
@@ -878,10 +892,10 @@ class Object3D with EventDispatcher {
   }
 
   void dispose() {
-    matrix?.dispose();
-    matrixWorld?.dispose();
-    modelViewMatrix?.dispose();
-    normalMatrix?.dispose();
+    matrix.dispose();
+    matrixWorld.dispose();
+    modelViewMatrix.dispose();
+    normalMatrix.dispose();
     bindMatrix?.dispose();
   }
 }
